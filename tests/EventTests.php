@@ -62,6 +62,9 @@ class EventTests extends PHPUnit_Framework_TestCase
 		$this->assertEquals($something, 2);
 	}
 
+	/**
+	 * @requires PHP 5.4
+	 */
 	public function testEventContext()
 	{
 		$something = 1;
