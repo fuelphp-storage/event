@@ -75,3 +75,21 @@ $container->on('my_event', function(){
 	// Do something
 }, $context, 3);
 ```
+
+## Triggering events
+
+You can trigger an event like so:
+
+```php
+$container->trigger('my_event');
+```
+
+In some cases you'll want to pass arguments to the callback, every argument after the event name will be passed to the handler. Those arguments will be appended to the arguments array used to fire the handler. The first argument is always the event object. Following are the params you've profided in `->trigger()`.
+
+```php
+$container->on('my_event', function($event, $param1, $param2){
+	// do stuff with $param1 and $param2
+});
+
+// Trigger the event with params.
+$container->trigger('my_event', 'param 1', 'param 2');
