@@ -2,30 +2,16 @@
 
 use Fuel\Event\Facade as Event;
 
-class EventableObject extends stdClass
-{
-	use Fuel\Event\Eventable;
-
-	public $num = 1;
-
-	public function __construct($bind = false, $prepend = false)
-	{
-		$this->_eventPrependSelf = $prepend;
-		$this->_eventBindSelf = $bind;
-	}
-
-	public function increment($event, $by = 1)
-	{
-		$this->num += $by;
-	}
-}
-
 class EventTests extends PHPUnit_Framework_TestCase
 {
 	protected $container;
 
 	public function setUp()
 	{
+		if(version_compare(phpversion(), '5.4.0') >= 0)
+		{
+			include_once __DIR__.'/../dummy/EventableObject.php';
+		}
 		$this->container = Event::forge();
 	}
 
