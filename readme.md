@@ -1,5 +1,7 @@
 # FuelPHP Event Package
 
+[![Build Status](https://secure.travis-ci.org/fuelphp/event.png)](http://travis-ci.org/fuelphp/event)
+
 Swift and elegant event management in PHP. A simple interface with a lot of power.
 
 ## What's included
