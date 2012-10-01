@@ -14,7 +14,7 @@ class EventTests extends PHPUnit_Framework_TestCase
 		}
 		else
 		{
-			include_once __DIR__.'/../dummy/EventableObject.php';
+			include_once __DIR__.'/../dummy/Object.php';
 		}
 
 		$this->container = Event::forge();
