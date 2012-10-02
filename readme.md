@@ -99,7 +99,7 @@ $container->trigger('my_event', 'param 1', 'param 2');
 
 ## Eventable objects
 
-PHP 5.4 gives us `traits`, an awesome way to share functionalities and allow for multiple inherritance. Models can become evenable when they use the `Fuel\Event\Eventable` trait. Using it is pretty straight forward.
+PHP 5.4 gives us `traits`, an awesome way to share functionalities and allow for multiple inheritance. Models can become eventable when they use the `Fuel\Event\Eventable` trait. Using it is pretty straight forward.
 
 ### Implementing the trait
 
@@ -128,7 +128,7 @@ $myObject->on('event', function($event){
 
 ### Configuration options
 
-There are 2 cnfiguration option to make it even easier to work with eventable objects which can:
+There are 2 configuration option to make it even easier to work with eventable objects which can:
 
 * make objects self binding,
 * auto prepend itself to the arguments array.
