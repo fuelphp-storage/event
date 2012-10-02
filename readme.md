@@ -96,3 +96,103 @@ $container->on('my_event', function($event, $param1, $param2){
 // Trigger the event with params.
 $container->trigger('my_event', 'param 1', 'param 2');
 ```
+
+## Eventable objects
+
+PHP 5.4 gives us `traits`, an awesome way to share functionalities and allow for multiple inherritance. Models can become evenable when they use the `Fuel\Event\Eventable` trait. Using it is pretty straight forward.
+
+### Implementing the trait
+
+```php
+<?php
+
+class EventableObject
+{
+	// Incluse/use the trait
+	use \Fuel\Event\Eventable;
+}
+
+// Get a new instance.
+$myObject = new EventableObject();
+```
+
+Now your models/object instances have the power of events under their hood. So the following becomes possible:
+
+```php
+$myObject = new EventableObject();
+
+$myObject->on('event', function($event){
+	// act on the event
+});
+```
+
+### Configuration options
+
+There are 2 cnfiguration option to make it even easier to work with eventable objects which can:
+
+* make objects self binding,
+* auto prepend itself to the arguments array.
+
+### Self binding objects
+
+```php
+<?php
+
+class EventableObject
+{
+	use Fuel\Event\Eventable;
+	
+	// Set to true to bind itself as the callback context.
+	protected $_eventBindSelf = true;
+}
+
+$myObject = new EventableObject();
+
+$myObject->on('event', function(){
+	// $this is now $myObject
+});
+```
+
+You are still able to overwrite the context by supplying it.
+
+```php
+$myObject->on('event', function(){
+	// $this is now $otherObject
+}, $otherObject);
+```
+
+### Self prepending object
+
+Use this when you want to prepend the model to the arguments array.
+
+```php
+<?php
+
+class EventableObject
+{
+	use Fuel\Event\Eventable;
+	
+	// Set to true to prepend itself to the arguments array.
+	protected $_eventPrependSelf = true;
+}
+
+$object = new EventableObject();
+
+$object->on('event', function($event, $self){
+	// $self now is $object
+});
+```
+
+When supplying params to the `->trigger` method they will be appended after the event and model:
+
+```php
+$object->on('event', function($event, $self, $param1, $param2){
+	// Act on the event.
+});
+
+$object->trigger('event', 'param 1', 'param 2');
+```
+
+## Enjoy!
+
+### For any questions about this package, hop into the #fuelphp IRC channel on freenode.net and look for FrenkyNet.
