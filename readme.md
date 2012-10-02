@@ -52,7 +52,7 @@ $container->on('my_event', function($event){
 }, $myObject);
 ```
 
-## Prioritizing events
+## Prioritizing events *
 
 Events can be priorritized with the addition of a priority number in the `->on` method.
 
@@ -76,6 +76,8 @@ $container->on('my_event', function(){
 }, $context, 3);
 ```
 
+__Context binding for Closure handlers is only available in PHP >= 5.4.0__ 
+
 ## Triggering events
 
 You can trigger an event like so:
@@ -93,3 +95,4 @@ $container->on('my_event', function($event, $param1, $param2){
 
 // Trigger the event with params.
 $container->trigger('my_event', 'param 1', 'param 2');
+```
