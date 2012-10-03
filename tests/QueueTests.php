@@ -108,14 +108,42 @@ class QueueTests extends PHPUnit_Framework_TestCase
 		$this->queue->queue('event', array(1));
 		$this->queue->queue('event', array(3));
 		
-		$result = $this->queue->flush('event', function($event, $number){
+		$this->queue->on('event', function($event, $number){
 			return $number;
 		});
 		
-		$result = $this->queue->flush('event', function($event, $number){
+		$this->queue->on('event', function($event, $number){
 			return $number + 1;
 		});
 		
+		$result = $this->queue->flush('event');
+		
 		$this->assertEquals($expected, $result);
 	}
+	
+	/*
+public function textMultipleFlushersWithPropagationStop()
+	{
+		$expected = array(
+			array(1),
+			array(1),
+		);
+	
+		$this->queue->queue('event');
+		$this->queue->queue('event');
+		
+		$this->queue->on('event', function($e){
+			$e->stopPropagation();
+			return 1;
+		});
+		
+		$this->queue->on('event', function($e){
+			return 2;
+		});
+		
+		$result = $this->queue->flush('event');
+		
+		$this->assertEquals($expected, $result);
+	}
+*/
 }

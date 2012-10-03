@@ -132,12 +132,20 @@ class Listener
 	/**
 	 * Invoke handler forewarder.
 	 *
-	 * @param   array  $args  handler arguments
-	 * @return  mixed  handler return value
+	 * @param   string  $event  triggered event
+	 * @param   array   $args   handler arguments
+	 * @return  mixed   handler return value
 	 */
-	public function __invoke($args)
+	public function __invoke($event, $args)
 	{
 		$handler = $this->handler;
+
+		// Store the original event
+		$original_event = $this->event;
+
+		// Set the triggered event
+		// This is needed when 'all' events are fired
+		$this->event = $event;
 
 		if ($this->context)
 		{
@@ -152,6 +160,15 @@ class Listener
 			}
 		}
 
-		return call_user_func_array($handler, $args);
+		// Prepend self to the arguments array
+		array_unshift($args, $this);
+
+		// Fetch the handler result
+		$result = call_user_func_array($handler, $args);
+
+		// Restore the old event name
+		$this->event = $original_event;
+
+		return $result;
 	}
 }

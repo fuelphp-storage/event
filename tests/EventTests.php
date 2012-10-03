@@ -34,7 +34,6 @@ class EventTests extends PHPUnit_Framework_TestCase
 		$this->assertEquals($something, 2);
 	}
 
-
 	public function testPreventClosure()
 	{
 		$something = 1;
@@ -108,6 +107,39 @@ class EventTests extends PHPUnit_Framework_TestCase
 
 		$this->assertEquals($expected, $result);
 	}
+	
+	public function testUnregisterEventByName()
+	{
+		$expected = array(2, 3);
+		
+		$this->container->on('event', function(){
+			return 1;
+		});
+		
+		$this->container->on('all', function(){
+			return 2;
+		});
+		
+		$this->container->off('event');
+		
+		$this->container->on('event', function(){
+			return 3;
+		});
+		
+		$result = $this->container->trigger('event');
+		
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testArrayCallback()
+	{
+		$obj = new EventableObject();
+
+		$this->container->on('my_event', array($obj, 'increment'));
+		$this->container->trigger('my_event', 2);
+
+		$this->assertEquals($obj->num, 3);
+	}
 
 	/**
 	 * @requires PHP 5.4
@@ -127,17 +159,6 @@ class EventTests extends PHPUnit_Framework_TestCase
 
 		$this->assertEquals($something, 2);
 	}
-
-	public function testArrayCallback()
-	{
-		$obj = new EventableObject();
-
-		$this->container->on('my_event', array($obj, 'increment'));
-		$this->container->trigger('my_event', 2);
-
-		$this->assertEquals($obj->num, 3);
-	}
-
 	/**
 	 * @requires PHP 5.4
 	 */

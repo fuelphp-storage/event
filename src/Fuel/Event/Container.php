@@ -74,7 +74,7 @@ class Container
 		// When an event name is given, only fetch that stack.
 		$events = $event ? $this->listeners[$event] : $this->listeners;
 
-		foreach ($event as $k => $e)
+		foreach ($events as $k => $e)
 		{
 			// If the event matches, delete it
 			if ($e->is($event, $handler, $context))
@@ -134,23 +134,17 @@ class Container
 			return -1;
 		});
 
-		foreach ($listeners as $listeners)
+		foreach ($listeners as $listener)
 		{
-			// Prepend the listener object.
-			array_unshift($args, $listeners);
-
 			// Fire the event and fetch the result
-			$return[] = $listeners($args);
+			$return[] = $listener($event, $args);
 
 			// When the bubbling is prevented.
-			if($listeners->propagationStopped())
+			if($listener->propagationStopped())
 			{
 				// Break the event loop.
 				break;
 			}
-
-			// Remove the event object.
-			array_shift($args);
 		}
 
 		return $return;

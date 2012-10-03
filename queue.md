@@ -2,7 +2,7 @@
 
 An event queue lets you fire events with multiple payloads at a delayed time. Using queue's is a great way to organize events. Where events are only fired with one payload, queue's can hold multiple payloads and listeners, and run through them in one go.
 
-## Setting up a Queue
+### Setting up a Queue
 
 ```php
 $queue = new Fuel\Event\Queue();

@@ -28,7 +28,20 @@ $container->on('my_event', function($event){
 });
 
 $container->trigger('my_event');
-``` 
+```
+
+### The special 'all' event
+
+The only reserved event for `Container`s and `Queue`'s is the `'all'` event. Listeners for this event
+will be triggered on every event fired:
+
+```php
+$container->on('all', function(){
+	echo 'This will also be fired!';
+});
+
+$container->trigger('event');
+```
 
 ## Unregistering of event
 
