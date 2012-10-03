@@ -127,8 +127,9 @@ class Container
 		$all_events = isset($this->events['all']) ? $this->events['all'] : array();
 
 		// Get the events.
-		$events = array_merge($this->events[$event], $all_events);
+		$events = array_merge(array(), $all_events, $this->events[$event]);
 
+		// Sort the events.
 		usort($events, function($a, $b)
 		{
 			if ($a->priority >= $b->priority)
@@ -147,12 +148,8 @@ class Container
 			// Prepend the event object.
 			array_unshift($args, $e);
 
-			// When the event type matches
-			if ($e->shouldFireOn($event))
-			{
-				// Fire the event and fetch the result
-				$return[] = $e($args);
-			}
+			// Fire the event and fetch the result
+			$return[] = $e($args);
 
 			// When the bubbling is prevented.
 			if($e->bubblePrevented())
