@@ -32,11 +32,11 @@ As you can see in the code above, the queue `on` method can also take a `$priori
 ```php
 $queue->queue('name', array('Hello', 'World'));
 
-$queue->on('name', function($one, $two){
+$queue->on('name', function($event, $one, $two){
 	echo $two.'!';
 }, 1);
 
-$queue->on('name', function($one, $two){
+$queue->on('name', function($event, $one, $two){
 	echo $one.' ';
 }, 2);
 ```
