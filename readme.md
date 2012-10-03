@@ -9,7 +9,7 @@ Swift and elegant event management in PHP. A simple interface with a lot of powe
 * Creating event containers for easy management.
 * Registering and unregistering of events.
 * Event prioritizing.
-* Bubbling of events can be prevented.
+* Propagation of events can be prevented.
 * A trait for eventable objects.
 * Context binding to event handlers.
 
@@ -95,6 +95,22 @@ $container->on('my_event', function($event, $param1, $param2){
 
 // Trigger the event with params.
 $container->trigger('my_event', 'param 1', 'param 2');
+```
+
+## Prevent event propagation
+
+You can break the chain of event listeners by calling `stopPropagation` on the event object.
+
+```php
+$container->on('my_event', function($e){
+	$event->stopPropagation();
+});
+
+$container->on('my_event', function($e){
+	// This will not get executed.
+});
+
+$container->trigger('my_event');
 ```
 
 ## Getting results
