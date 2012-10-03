@@ -11,7 +11,7 @@
 
 namespace Fuel\Event;
 
-class Event
+class Listener
 {
 	/**
 	 * @var  string  $event  event name
@@ -29,9 +29,9 @@ class Event
 	protected $context;
 
 	/**
-	 * @var  bool  $bubble  continue bubbling boolean
+	 * @var  bool  $propagate  continue propagation boolean
 	 */
-	protected $bubble = true;
+	protected $propagate = true;
 
 	/**
 	 * @var  int  $priority  priority
@@ -59,21 +59,21 @@ class Event
 	 *
 	 * @return  object  $this
 	 */
-	public function preventBubbling()
+	public function stopPropagation()
 	{
-		$this->bubble = false;
+		$this->propagate = false;
 
 		return $this;
 	}
 
 	/**
-	 * Returns wether event bubbling should continue.
+	 * Returns wether event propagation should continue.
 	 *
-	 * @return  bool  wether event bubbling should continue.
+	 * @return  bool  wether event propagation should continue.
 	 */
-	public function bubblePrevented()
+	public function propagationStopped()
 	{
-		return ! $this->bubble;
+		return ! $this->propagate;
 	}
 
 	/**
@@ -121,16 +121,6 @@ class Event
 		}
 
 		return false;
-	}
-
-	/**
-	 * Check wether the event object matches an event type.
-	 *
-	 * @return bool  wether the object matches the event type
-	 */
-	public function shouldFireOn($event)
-	{
-		return $this->event === $event;
 	}
 
 	/**

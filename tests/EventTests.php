@@ -40,7 +40,7 @@ class EventTests extends PHPUnit_Framework_TestCase
 		$something = 1;
 
 		$this->container->on('my_event', function($e){
-			$e->preventBubbling();
+			$e->stopPropagation();
 		});
 
 		$this->container->on('my_event', function($e) use(&$something)

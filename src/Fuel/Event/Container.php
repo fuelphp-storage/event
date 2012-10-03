@@ -16,7 +16,7 @@ class Container
 	/**
 	 * @var  array  $events  registered events
 	 */
-	protected $events = array();
+	protected $listners = array();
 
 	/**
 	 * Container constructor
@@ -25,7 +25,7 @@ class Container
 	 */
 	public function __construct(array $events = array())
 	{
-		$this->events = $events;
+		$this->listeners = $events;
 	}
 
 	/**
@@ -44,9 +44,9 @@ class Container
 			throw new \InvalidArgumentException('The $handler should be callable.');
 		}
 
-		if ( ! isset($this->events[$event]))
+		if ( ! isset($this->listeners[$event]))
 		{
-			$this->events[$event] = array();
+			$this->listeners[$event] = array();
 		}
 
 		if (is_int($context))
@@ -55,7 +55,7 @@ class Container
 			$context = null;
 		}
 
-		$this->events[$event][] = new Event($event, $handler, $context, $priority);
+		$this->listeners[$event][] = new Listener($event, $handler, $context, $priority);
 
 		return $this;
 	}
@@ -71,14 +71,14 @@ class Container
 	public function off($event = null, $handler = null, $context = null)
 	{
 		// When there are no events to fire
-		if (($event and ! isset($this->events[$event])) or empty($this->events[$event]))
+		if (($event and ! isset($this->listeners[$event])) or empty($this->listeners[$event]))
 		{
 			// Skip execution
 			return $this;
 		}
 
 		// When an event name is given, only fetch that stack.
-		$events = $event ? $this->events[$event] : $this->events;
+		$events = $event ? $this->listeners[$event] : $this->listeners;
 
 		foreach ($event as $k => $e)
 		{
@@ -89,12 +89,12 @@ class Container
 				if ($event)
 				{
 					// Saves a function call ;-)
-					unset($this->events[$event][$k]);
+					unset($this->listeners[$event][$k]);
 				}
 				else
 				{
 					// Otherwise, retrieve the event name from the Event object.
-					unset($this->events[$e->event()][$k]);
+					unset($this->listeners[$e->event()][$k]);
 				}
 			}
 		}
@@ -110,11 +110,17 @@ class Container
 	 */
 	public function trigger($event)
 	{
+		// Get the handlers
+		$listeners = $this->getListeners($event);
+		
+		// Set return array
+		$return = array();
+
 		// When there are no handlers
-		if ( ! isset($this->events[$event]))
+		if (empty($listeners))
 		{
 			// Skip execution
-			return $this;
+			return $return;
 		}
 
 		// Get the event arguments.
@@ -122,15 +128,9 @@ class Container
 
 		// Shift the event name off the arguments array
 		array_shift($args);
-		
-		// Get the special all events
-		$all_events = isset($this->events['all']) ? $this->events['all'] : array();
-
-		// Get the events.
-		$events = array_merge(array(), $all_events, $this->events[$event]);
 
 		// Sort the events.
-		usort($events, function($a, $b)
+		usort($listeners, function($a, $b)
 		{
 			if ($a->priority >= $b->priority)
 			{
@@ -140,19 +140,16 @@ class Container
 			return -1;
 		});
 
-		// Set return array
-		$return = array();
-
-		foreach ($events as $e)
+		foreach ($listeners as $listeners)
 		{
-			// Prepend the event object.
-			array_unshift($args, $e);
+			// Prepend the listener object.
+			array_unshift($args, $listeners);
 
 			// Fire the event and fetch the result
-			$return[] = $e($args);
+			$return[] = $listeners($args);
 
 			// When the bubbling is prevented.
-			if($e->bubblePrevented())
+			if($listeners->propagationStopped())
 			{
 				// Break the event loop.
 				break;
@@ -163,5 +160,23 @@ class Container
 		}
 
 		return $return;
+	}
+
+	/**
+	 * Retrieve the handlers for a given type, including the all events.
+	 *
+	 * @param   string  $event  event name
+	 * @return  array   array of event objects for a given type
+	 */
+	public function getListeners($event)
+	{
+		// Get the special all events
+		$all_listeners = isset($this->listeners['all']) ? $this->listeners['all'] : array();
+
+		// Get the handlers
+		$event_listeners = isset($this->listeners[$event]) ? $this->listeners[$event] : array();
+
+		// Return the merged handlers array
+		return array_merge(array(), $all_listeners, $event_listeners);
 	}
 }
