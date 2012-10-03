@@ -12,7 +12,7 @@ Swift and elegant event management in PHP. A simple interface with a lot of powe
 * Propagation of events can be prevented.
 * A trait for eventable objects.
 * Context binding to event handlers.
-* Queue's ([with docs](https://github.com/fuelphp/event/blob/master/readme.md)).
+* Queue's ([with docs](https://github.com/fuelphp/event/blob/master/queue.md)).
 
 ## A simple example
 
