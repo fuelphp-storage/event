@@ -49,12 +49,6 @@ class Container
 			$this->listeners[$event] = array();
 		}
 
-		if (is_int($context))
-		{
-			$priority = $context;
-			$context = null;
-		}
-
 		$this->listeners[$event][] = new Listener($event, $handler, $context, $priority);
 
 		return $this;

@@ -48,6 +48,12 @@ class Listener
 	 */
 	public function __construct($event, $handler, $context = null, $priority = null)
 	{
+		if (is_int($context))
+		{
+			$priority = $context;
+			$context = null;
+		}
+
 		$this->event = $event;
 		$this->handler = $handler;
 		$this->context = $context;
