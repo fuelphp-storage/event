@@ -31,12 +31,26 @@ class Queue
 		
 		return $this;
 	}
-	
+
+	/**
+	 * Retrieve the queue payloads
+	 *
+	 * @param   string  $queue  queue name
+	 * @return  array   queue payloads
+	 */
 	public function getQueuePayload($queue)
 	{
 		return isset($this->queue[$queue]) ? $this->queue[$queue] : array();
 	}
 
+	/**
+	 * Register a flusher.
+	 *
+	 * @param   string  $queue     queue name
+	 * @param   mixed   $flusher   flusher
+	 * @param   mixed   $context   flusher context
+	 * @param   int     $priority  priority
+	 */
 	public function addFlusher($queue, $flusher, $context = null, $priority = 0)
 	{
 		// Ensure there is an event container.
@@ -47,7 +61,14 @@ class Queue
 
 		return $this;
 	}
-	
+
+	/**
+	 * Remove a flusher.
+	 *
+	 * @param   string  $queue     queue name
+	 * @param   mixed   $flusher   flusher
+	 * @param   mixed   $context   flusher context
+	 */
 	public function removeFlusher($queue = null, $flusher = null, $context = null)
 	{
 		// When there is no event container
@@ -62,7 +83,15 @@ class Queue
 		
 		return $this;
 	}
-	
+
+	/**
+	 * Flushes a queue. Adds a flusher when supplied.
+	 *
+	 * @param   string  $queue     queue name
+	 * @param   mixed   $flusher   flusher
+	 * @param   mixed   $context   flusher context
+	 * @param   int     $priority  priority
+	 */
 	public function flush($queue, $flusher = null, $context = null, $priority = 0)
 	{
 		// Set the return array
@@ -93,7 +122,13 @@ class Queue
 		
 		return $return;
 	}
-	
+
+	/**
+	 * Clear an event queue, removes all payloads and flushers.
+	 *
+	 * @param   string  $queue  queue name
+	 * @return  object  $this
+	 */
 	public function clear($queue)
 	{
 		if (isset($this->queue[$queue]))
