@@ -97,6 +97,27 @@ $container->on('my_event', function($event, $param1, $param2){
 $container->trigger('my_event', 'param 1', 'param 2');
 ```
 
+## Getting results
+
+When an event is triggered, all the return values will be collected and returned.
+
+```php
+$container->on('my_event', function(){
+	return 1;
+});
+
+$container->on('my_event', function(){
+	return 2;
+});
+
+$container->on('my_event', function(){
+	return 3;
+});
+
+$result = $container->trigger('my_event');
+// [1, 2, 3]
+```
+
 ## Eventable objects
 
 PHP 5.4 gives us `traits`, an awesome way to share functionalities and allow for multiple inheritance. Models can become eventable when they use the `Fuel\Event\Eventable` trait. Using it is pretty straight forward.

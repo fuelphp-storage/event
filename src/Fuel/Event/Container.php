@@ -122,9 +122,12 @@ class Container
 
 		// Shift the event name off the arguments array
 		array_shift($args);
+		
+		// Get the special all events
+		$all_events = isset($this->events['all']) ? $this->events['all'] : array();
 
 		// Get the events.
-		$events = $this->events[$event];
+		$events = array_merge($this->events[$event], $all_events);
 
 		usort($events, function($a, $b)
 		{
