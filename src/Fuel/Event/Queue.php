@@ -38,7 +38,7 @@ class Queue
 	 * @param   string  $queue  queue name
 	 * @return  array   queue payloads
 	 */
-	public function getQueuePayload($queue)
+	public function payload($queue)
 	{
 		return isset($this->queue[$queue]) ? $this->queue[$queue] : array();
 	}
@@ -51,7 +51,7 @@ class Queue
 	 * @param   mixed   $context   flusher context
 	 * @param   int     $priority  priority
 	 */
-	public function addFlusher($queue, $flusher, $context = null, $priority = 0)
+	public function on($queue, $flusher, $context = null, $priority = 0)
 	{
 		// Ensure there is an event container.
 		$this->container or $this->container = new Container();
@@ -69,7 +69,7 @@ class Queue
 	 * @param   mixed   $flusher   flusher
 	 * @param   mixed   $context   flusher context
 	 */
-	public function removeFlusher($queue = null, $flusher = null, $context = null)
+	public function off($queue = null, $flusher = null, $context = null)
 	{
 		// When there is no event container
 		if ( ! $this->container)
@@ -99,7 +99,7 @@ class Queue
 
 		if ($flusher)
 		{
-			$this->addFlusher($queue, $flusher, $context, $priority);
+			$this->on($queue, $flusher, $context, $priority);
 		}
 		
 		// When there is no event container
@@ -110,7 +110,7 @@ class Queue
 		}
 		
 		// Get the queue payload
-		$queuePayload = $this->getQueuePayload($queue);
+		$queuePayload = $this->payload($queue);
 		
 		foreach ($queuePayload as $payload)
 		{

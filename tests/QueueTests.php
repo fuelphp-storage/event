@@ -23,7 +23,7 @@ class QueueTests extends PHPUnit_Framework_TestCase
 		$this->queue->queue('event', array(2));
 		$this->queue->queue('event', array(3));
 		
-		$result = $this->queue->getQueuePayload('event');
+		$result = $this->queue->payload('event');
 		
 		$this->assertEquals($expected, $result);
 	}
