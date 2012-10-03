@@ -67,6 +67,27 @@ class EventTests extends PHPUnit_Framework_TestCase
 		$this->assertEquals($something, 2);
 	}
 
+	public function testReturnValues()
+	{
+		$expected = array(1, 2, 3);
+
+		$this->container->on('my_event', function(){
+			return 1;
+		});
+
+		$this->container->on('my_event', function(){
+			return 2;
+		});
+
+		$this->container->on('my_event', function(){
+			return 3;
+		});
+
+		$result = $this->container->trigger('my_event');
+
+		$this->assertEquals($expected, $result);
+	}
+
 	/**
 	 * @requires PHP 5.4
 	 */

@@ -46,7 +46,7 @@ class Event
 	 * @param  mixed   $context   closure context
 	 * @param  int     $priority  closure context
 	 */
-	public function __construct($event, $handler, $context, $priority)
+	public function __construct($event, $handler, $context = null, $priority = null)
 	{
 		$this->event = $event;
 		$this->handler = $handler;
@@ -136,7 +136,8 @@ class Event
 	/**
 	 * Invoke handler forewarder.
 	 *
-	 * @param  array  $args  handler arguments
+	 * @param   array  $args  handler arguments
+	 * @return  mixed  handler return value
 	 */
 	public function __invoke($args)
 	{
@@ -155,6 +156,6 @@ class Event
 			}
 		}
 
-		call_user_func_array($handler, $args);
+		return call_user_func_array($handler, $args);
 	}
 }

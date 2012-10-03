@@ -15,6 +15,12 @@ abstract class Facade
 {
 	protected static $instances = array();
 
+	/**
+	 * Create and retrieve an Container instance
+	 *
+	 * @param   string  $name    instance reference
+	 * @param   array   $events  events array
+	 */
 	public static function instance($name = '__default__', $events = array())
 	{
 		if (isset(static::$instances[$name]))

@@ -106,7 +106,7 @@ class Container
 	 * Trigger an event.
 	 *
 	 * @param   string  $event  event to trigger
-	 * @return  object  $this
+	 * @return  array   return values
 	 */
 	public function trigger($event)
 	{
@@ -136,6 +136,9 @@ class Container
 			return -1;
 		});
 
+		// Set return array
+		$return = array();
+
 		foreach ($events as $e)
 		{
 			// Prepend the event object.
@@ -144,8 +147,8 @@ class Container
 			// When the event type matches
 			if ($e->shouldFireOn($event))
 			{
-				// Fire the event
-				$e($args);
+				// Fire the event and fetch the result
+				$return[] = $e($args);
 			}
 
 			// When the bubbling is prevented.
@@ -159,6 +162,6 @@ class Container
 			array_shift($args);
 		}
 
-		return $this;
+		return $return;
 	}
 }
