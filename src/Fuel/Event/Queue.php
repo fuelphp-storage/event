@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Event Package
+ *
+ * @package    Fuel\Event
+ * @version    1.0.0
+ * @license    MIT License
+ * @copyright  2010 - 2012 Fuel Development Team
+ */
+
 namespace Fuel\Event;
 
 class Queue
