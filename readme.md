@@ -19,9 +19,7 @@ Swift and elegant event management in PHP. A simple interface with a lot of powe
 ```php
 <?php
 
-use Fuel\Event\Facade as Event;
-
-$container = Event::forge();
+$container = new Fuel\Event\Container();
 
 $container->on('my_event', function($event){
 	// Act on the event
