@@ -13,6 +13,7 @@ Swift and elegant event management in PHP. A simple interface with a lot of powe
 * A trait for eventable objects.
 * Context binding to event handlers.
 * Queue's ([with docs](https://github.com/fuelphp/event/blob/master/queue.md)).
+* Easy access through handy Facades ([docs](https://github.com/fuelphp/event/blob/master/facades.md))
 
 ## A simple example
 

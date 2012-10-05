@@ -9,39 +9,55 @@
  * @copyright  2010 - 2012 Fuel Development Team
  */
 
-namespace Fuel\Event;
+namespace Fuel\Event\Facade;
 
-abstract class Facade
+abstract class Base
 {
 	protected static $instances = array();
 
 	/**
-	 * Create and retrieve an Container instance
+	 * Create and retrieve an instance.
 	 *
 	 * @param   string  $name    instance reference
 	 * @param   array   $events  events array
 	 */
-	public static function instance($name = '__default__', $events = array())
+	public static function instance($name = '__default__')
 	{
 		if (isset(static::$instances[$name]))
 		{
 			return static::$instances[$name];
 		}
 
-		static::$instances[$name] = new Container($events);
+		static::$instances[$name] = static::forge();
 
 		return static::$instances[$name];
 	}
 
 	/**
-	 * Forge a new event container
+	 * Delete an instance from the facade.
 	 *
-	 * @param   array   $events  events array
-	 * @return  object  new Container instance
+	 * @param  mixed  $name  instance name or true for all
 	 */
-	public static function forge($events = array())
+	public static function delete($name)
 	{
-		return new Container($events);
+		if ($name === true)
+		{
+			static::$instances = array();
+		}
+		elseif (isset(static::$instances[$name]))
+		{
+			unset(static::$instances[$name]);
+		}
+	}
+
+	/**
+	 * Get a new instance. Must be implemented by child classes.
+	 *
+	 * @return  object  new  instance
+	 */
+	public static function forge()
+	{
+		throw new Exception(get_called_class().' must define a ::forge function.');
 	}
 
 	/**

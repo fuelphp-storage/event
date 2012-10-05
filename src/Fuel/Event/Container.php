@@ -19,16 +19,6 @@ class Container
 	protected $listners = array();
 
 	/**
-	 * Container constructor
-	 *
-	 * @param  array  $events  events array
-	 */
-	public function __construct(array $events = array())
-	{
-		$this->listeners = $events;
-	}
-
-	/**
 	 * Attaches a new event.
 	 *
 	 * @param   string  $event     event name
@@ -39,11 +29,6 @@ class Container
 	 */
 	public function on($event, $handler, $context = null, $priority = 0)
 	{
-		if ( ! is_callable($handler))
-		{
-			throw new \InvalidArgumentException('The $handler should be callable.');
-		}
-
 		if ( ! isset($this->listeners[$event]))
 		{
 			$this->listeners[$event] = array();

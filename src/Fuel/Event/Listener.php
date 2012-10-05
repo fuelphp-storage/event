@@ -53,6 +53,16 @@ class Listener
 			$priority = $context;
 			$context = null;
 		}
+		
+		if ( ! is_callable($handler))
+		{
+			throw new \InvalidArgumentException('Handlers must be callable');
+		}
+		
+		if ($context and ! is_object($context))
+		{
+			throw new \InvalidArgumentException('Contexts must be objects');
+		}
 
 		$this->event = $event;
 		$this->handler = $handler;

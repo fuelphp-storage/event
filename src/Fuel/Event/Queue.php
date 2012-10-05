@@ -34,6 +34,11 @@ class Queue
 			// Create one if it doesn't exist
 			$this->queue = array();
 		}
+		
+		if ( ! is_array($payload))
+		{
+			throw new \InvalidArgumentException('Queue payload must an array.');
+		}
 
 		// Append the payload to the queue
 		$this->queue[$queue][] = $payload;
@@ -42,7 +47,7 @@ class Queue
 	}
 
 	/**
-	 * Retrieve the queue payloads
+	 * Retrieve the queue payload
 	 *
 	 * @param   string  $queue  queue name
 	 * @return  array   queue payloads

@@ -1,6 +1,6 @@
 <?php
 
-use Fuel\Event\Facade as Event;
+use Fuel\Event\Container;
 
 class EventTests extends PHPUnit_Framework_TestCase
 {
@@ -17,7 +17,7 @@ class EventTests extends PHPUnit_Framework_TestCase
 			include_once __DIR__.'/../dummy/Object.php';
 		}
 
-		$this->container = Event::forge();
+		$this->container = new Container();
 	}
 
 	public function testEventClosure()
@@ -50,6 +50,22 @@ class EventTests extends PHPUnit_Framework_TestCase
 		$this->container->trigger('my_event');
 
 		$this->assertEquals($something, 1);
+	}
+
+	/**
+     * @expectedException InvalidArgumentException
+     */
+	public function testInvalidHandler()
+	{
+		$this->container->on('my_event', 'not callable');
+	}
+
+	/**
+     * @expectedException InvalidArgumentException
+     */
+	public function testInvalidContext()
+	{
+		$this->container->on('my_event', function(){}, 'not a context');
 	}
 
 	public function testEventArguments()

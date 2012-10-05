@@ -9,7 +9,9 @@
  * @copyright  2010 - 2012 Fuel Development Team
  */
 
-namespace Fuel\Event;
+namespace Fuel\Event\Behaviour;
+
+use Fuel\Event\Container;
 
 trait Eventable
 {

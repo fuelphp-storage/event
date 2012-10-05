@@ -121,8 +121,7 @@ class QueueTests extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 	
-	/*
-public function textMultipleFlushersWithPropagationStop()
+	public function textMultipleFlushersWithPropagationStop()
 	{
 		$expected = array(
 			array(1),
@@ -145,5 +144,4 @@ public function textMultipleFlushersWithPropagationStop()
 		
 		$this->assertEquals($expected, $result);
 	}
-*/
 }
