@@ -12,7 +12,7 @@ Swift and elegant event management in PHP. A simple interface with a lot of powe
 * Propagation of events can be prevented.
 * A trait for eventable objects.
 * Context binding to event handlers.
-* Queue's ([with docs](https://github.com/fuelphp/event/blob/master/queue.md)).
+* Queues ([with docs](https://github.com/fuelphp/event/blob/master/queue.md)).
 * Easy access through handy Facades ([docs](https://github.com/fuelphp/event/blob/master/facades.md))
 
 ## A simple example
@@ -31,7 +31,7 @@ $container->trigger('my_event');
 
 ### The special 'all' event
 
-The only reserved event for `Container`s and `Queue`'s is the `'all'` event. Listeners for this event
+The only reserved event for `Container`s and `Queue`s is the `'all'` event. Listeners for this event
 will be triggered on every event fired:
 
 ```php
@@ -65,9 +65,9 @@ $container->on('my_event', function($event){
 }, $myObject);
 ```
 
-## Prioritizing events *
+## Prioritizing events
 
-Events can be priorritized with the addition of a priority number in the `->on` method.
+Events can be prioritized with the addition of a priority number in the `->on` method.
 
 ```php
 $container->on('my_event', function(){
@@ -89,7 +89,7 @@ $container->on('my_event', function(){
 }, $context, 3);
 ```
 
-__Context binding for Closure handlers is only available in PHP >= 5.4.0__ 
+__Context binding for Closure handlers is only available in PHP >= 5.4.0__
 
 ## Triggering events
 
@@ -178,7 +178,7 @@ $myObject->on('event', function($event){
 
 ### Configuration options
 
-There are 2 configuration option to make it even easier to work with eventable objects which can:
+There are 2 configuration options to make it even easier to work with eventable objects, which can:
 
 * make objects self binding,
 * auto prepend itself to the arguments array.
@@ -191,7 +191,7 @@ There are 2 configuration option to make it even easier to work with eventable o
 class EventableObject
 {
 	use Fuel\Event\Behaviour\Eventable;
-	
+
 	// Set to true to bind itself as the callback context.
 	protected $_eventBindSelf = true;
 }
@@ -221,7 +221,7 @@ Use this when you want to prepend the model to the arguments array.
 class EventableObject
 {
 	use Fuel\Event\Behaviour\Eventable;
-	
+
 	// Set to true to prepend itself to the arguments array.
 	protected $_eventPrependSelf = true;
 }

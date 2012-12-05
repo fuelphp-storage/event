@@ -63,3 +63,19 @@ $result = Queue::queue('my_event', $payload)
 	->on('my_event', $handler)
 	->flush('my_event');
 ```
+
+## Named instances
+
+Both Queues and Containers have a multiton implementation. This allows you "namespace" queues and events. This is done by using the `::instance` method:
+
+```php
+
+use Fuel\Event\Facade\Event;
+use Fuel\Event\Facade\Queue;
+
+// It works for queues
+Queue::instance('my_name')->on('event', $handler);
+
+// As well as for events
+Event::instance('named')->on('this', $doThat);
+```

@@ -8,7 +8,7 @@ An event queue lets you fire events with multiple payloads at a delayed time. Us
 $queue = new Fuel\Event\Queue();
 ```
 
-### Adding payloads to the que
+### Adding payloads to the queue
 
 ```php
 $queue->queue('name', array('param 1 - a', 'param 2 - a'));
@@ -17,11 +17,11 @@ $queue->queue('name', array('param 1 - a', 'param 2 - a'));
 $queue->queue('name', array('param 1 - b', 'param 2 - b'));
 ```
 
-You've now got 2 payloads in the que, ready to get cracking.
+You've now got 2 payloads in the queue, ready to get cracking.
 
 ### Registering Flushers (Listeners, Workers, ...)
 
-Where in events callbacks are often refered to as Listeners, in Queue they're commonly known as Flushers or Workers. Registering a Flusher works just like adding a Listener to a Container:
+Where in events callbacks are often referred to as Listeners, in Queue they're commonly known as Flushers or Workers. Registering a Flusher works just like adding a Listener to a Container:
 
 ```php
 $queue->on('name', $callable_flusher, $context, $priority);
@@ -45,7 +45,7 @@ When flushed this will echo out `Hello World!`.
 
 ## Flushing the queue
 
-In order to run the queue'd payloads by the Flushers you'll have to `flush()`.
+In order to run the queued payloads by the Flushers you'll have to `flush()`.
 
 ```php
 $result = $queue->flush('name');
