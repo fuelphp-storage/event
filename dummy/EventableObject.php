@@ -2,7 +2,7 @@
 
 class EventableObject extends stdClass
 {
-	use Fuel\Event\EventTrait;
+	use FuelPHP\Event\EventTrait;
 
 	public $num = 1;
 
