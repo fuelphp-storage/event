@@ -23,7 +23,7 @@ class QueueTests extends PHPUnit_Framework_TestCase
 		$this->queue->queue('event', array(2));
 		$this->queue->queue('event', array(3));
 
-		$result = $this->queue->payload('event');
+		$result = $this->queue->getPayload('event');
 
 		$this->assertEquals($expected, $result);
 	}
@@ -52,7 +52,7 @@ class QueueTests extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 
-	public function testFlusherWithPayload()
+	public function testFlusherWithgetPayload()
 	{
 		$expected = array(array(1));
 
@@ -79,7 +79,7 @@ class QueueTests extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 
-	public function testMultipleFlushersWithPayload()
+	public function testMultipleFlushersWithgetPayload()
 	{
 		$expected = array(
 			array(1, 2),

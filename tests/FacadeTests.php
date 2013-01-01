@@ -54,7 +54,7 @@ class FacadeTests extends PHPUnit_Framework_TestCase
 		Queue::delete('my_instance');
 
 		$instance = Queue::instance('my_instance');
-		$payload = $instance->payload('event');
+		$payload = $instance->getPayload('event');
 
 		$this->assertEquals($payload, array());
 	}
