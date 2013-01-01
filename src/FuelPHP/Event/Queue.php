@@ -52,7 +52,7 @@ class Queue
 	 * @param   string  $queue  queue name
 	 * @return  array   queue payloads
 	 */
-	public function payload($queue)
+	public function getPayload($queue)
 	{
 		return isset($this->queue[$queue]) ? $this->queue[$queue] : array();
 	}
@@ -124,7 +124,7 @@ class Queue
 		}
 
 		// Get the queue payload
-		$queuePayload = $this->payload($queue);
+		$queuePayload = $this->getPayload($queue);
 
 		foreach ($queuePayload as $payload)
 		{
