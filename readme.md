@@ -154,12 +154,10 @@ PHP 5.4 gives us `traits`, an awesome way to share functionalities and allow for
 ### Implementing the trait
 
 ```php
-<?php
-
 class EventableObject
 {
 	// Incluse/use the trait
-	use \FuelPHP\Event\Behaviour\Eventable;
+	use \FuelPHP\Event\EventTrait;
 }
 
 // Get a new instance.
@@ -186,11 +184,10 @@ There are 2 configuration options to make it even easier to work with eventable 
 ### Self binding objects
 
 ```php
-<?php
 
 class EventableObject
 {
-	use FuelPHP\Event\Behaviour\Eventable;
+	use FuelPHP\Event\EventTrait;
 
 	// Set to true to bind itself as the callback context.
 	protected $_eventBindSelf = true;
@@ -220,7 +217,7 @@ Use this when you want to prepend the model to the arguments array.
 
 class EventableObject
 {
-	use FuelPHP\Event\Behaviour\Eventable;
+	use FuelPHP\Event\EventTrait;
 
 	// Set to true to prepend itself to the arguments array.
 	protected $_eventPrependSelf = true;

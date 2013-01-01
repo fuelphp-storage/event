@@ -2,7 +2,7 @@
 
 class EventableObject extends stdClass
 {
-	use Fuel\Event\Behaviour\Eventable;
+	use Fuel\Event\EventTrait;
 
 	public $num = 1;
 

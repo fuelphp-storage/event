@@ -9,11 +9,9 @@
  * @copyright  2010 - 2012 Fuel Development Team
  */
 
-namespace FuelPHP\Event\Behaviour;
+namespace FuelPHP\Event;
 
-use FuelPHP\Event\Container;
-
-trait Eventable
+trait EventTrait
 {
 	/**
 	 * @var  array  $_eventContainer  event container
