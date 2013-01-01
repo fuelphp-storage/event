@@ -5,7 +5,7 @@ An event queue lets you fire events with multiple payloads at a delayed time. Us
 ### Setting up a Queue
 
 ```php
-$queue = new Fuel\Event\Queue();
+$queue = new FuelPHP\Event\Queue();
 ```
 
 ### Adding payloads to the queue

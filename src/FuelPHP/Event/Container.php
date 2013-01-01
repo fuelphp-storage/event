@@ -3,13 +3,13 @@
 /**
  * Event Package
  *
- * @package    Fuel\Event
+ * @package    FuelPHP\Event
  * @version    1.0.0
  * @license    MIT License
  * @copyright  2010 - 2012 Fuel Development Team
  */
 
-namespace Fuel\Event;
+namespace FuelPHP\Event;
 
 class Container
 {
@@ -91,7 +91,7 @@ class Container
 	{
 		// Get the handlers
 		$listeners = $this->getListeners($event);
-		
+
 		// Set return array
 		$return = array();
 

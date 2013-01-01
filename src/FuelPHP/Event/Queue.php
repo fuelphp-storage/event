@@ -3,13 +3,13 @@
 /**
  * Event Package
  *
- * @package    Fuel\Event
+ * @package    FuelPHP\Event
  * @version    1.0.0
  * @license    MIT License
  * @copyright  2010 - 2012 Fuel Development Team
  */
 
-namespace Fuel\Event;
+namespace FuelPHP\Event;
 
 class Queue
 {
@@ -34,7 +34,7 @@ class Queue
 			// Create one if it doesn't exist
 			$this->queue = array();
 		}
-		
+
 		if ( ! is_array($payload))
 		{
 			throw new \InvalidArgumentException('Queue payload must an array.');
@@ -42,7 +42,7 @@ class Queue
 
 		// Append the payload to the queue
 		$this->queue[$queue][] = $payload;
-		
+
 		return $this;
 	}
 
@@ -94,7 +94,7 @@ class Queue
 
 		// Remove the flusher from the event container.
 		$this->container->off($queue, $flusher, $context);
-		
+
 		return $this;
 	}
 
@@ -115,17 +115,17 @@ class Queue
 		{
 			$this->on($queue, $flusher, $context, $priority);
 		}
-		
+
 		// When there is no event container
 		if ( ! $this->container)
 		{
 			// Skip execution
 			return $return;
 		}
-		
+
 		// Get the queue payload
 		$queuePayload = $this->payload($queue);
-		
+
 		foreach ($queuePayload as $payload)
 		{
 			// Prepend the event
@@ -133,7 +133,7 @@ class Queue
 
 			$return[] = call_user_func_array(array($this->container, 'trigger'), $payload);
 		}
-		
+
 		return $return;
 	}
 
@@ -149,7 +149,7 @@ class Queue
 		{
 			unset($this->queue[$queue]);
 		}
-		
+
 		// When there is no event container
 		if ( ! $this->container)
 		{
@@ -159,7 +159,7 @@ class Queue
 
 		// Remove all flushers
 		$this->container->off($queue);
-		
+
 		return $this;
 	}
 }

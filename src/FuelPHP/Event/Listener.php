@@ -3,13 +3,13 @@
 /**
  * Event Package
  *
- * @package    Fuel\Event
+ * @package    FuelPHP\Event
  * @version    1.0.0
  * @license    MIT License
  * @copyright  2010 - 2012 Fuel Development Team
  */
 
-namespace Fuel\Event;
+namespace FuelPHP\Event;
 
 class Listener
 {
@@ -53,12 +53,12 @@ class Listener
 			$priority = $context;
 			$context = null;
 		}
-		
+
 		if ( ! is_callable($handler))
 		{
 			throw new \InvalidArgumentException('Handlers must be callable');
 		}
-		
+
 		if ($context and ! is_object($context))
 		{
 			throw new \InvalidArgumentException('Contexts must be objects');

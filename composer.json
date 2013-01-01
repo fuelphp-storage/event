@@ -3,6 +3,6 @@
     "type": "library",
     "description": "Framework independent Event library.",
     "autoload": {
-		"psr-0": { "Fuel\\Event": "src/" }
+		"psr-0": { "FuelPHP\\Event": "src/" }
 	}
 }
