@@ -16,7 +16,7 @@ class Container
 	/**
 	 * @var  array  $events  registered events
 	 */
-	protected $listners = array();
+	protected $listeners = array();
 
 	/**
 	 * Attaches a new event.
