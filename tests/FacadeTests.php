@@ -1,7 +1,7 @@
 <?php
 
-use Fuel\Event\Facade\Event;
-use Fuel\Event\Facade\Queue;
+use Fuel\Event\Facades\Event;
+use Fuel\Event\Facades\Queue;
 
 class FacadeTests extends PHPUnit_Framework_TestCase
 {
