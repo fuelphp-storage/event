@@ -17,6 +17,10 @@ namespace Fuel\Event;
 // register the services of this composer library
 \Dependency::getInstance()->registerService(new ServicesProvider);
 
+// alias facade classes to global
+\Alias::alias('Fuel\Event\Facades\Event', 'Event');
+\Alias::alias('Fuel\Event\Facades\Queue', 'Queue');
+
 /**
  * FuelPHP Composer library application bootstrap
  */
