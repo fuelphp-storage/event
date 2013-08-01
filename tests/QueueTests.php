@@ -1,6 +1,6 @@
 <?php
 
-use FuelPHP\Event\Queue;
+use Fuel\Event\Queue;
 
 class QueueTests extends PHPUnit_Framework_TestCase
 {

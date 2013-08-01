@@ -1,8 +1,8 @@
 language: php
 
 php:
-  - 5.3
   - 5.4
+  - 5.5
 
 before_script:
   - curl -s http://getcomposer.org/installer | php
@@ -11,4 +11,4 @@ before_script:
 script: phpunit
 
 notifications:
-  irc: "irc.freenode.org#fuelphp"
+  irc: "irc.freenode.org#fuelphp-status"

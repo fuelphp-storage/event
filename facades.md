@@ -12,12 +12,12 @@ The common interface consists of:
 
 ## Event Facade
 
-Under the hood the Facade provides access to a `FuelPHP\Event\Container` and maps all the available method to that instance. So now you can do:
+Under the hood the Facade provides access to a `Fuel\Event\Container` and maps all the available method to that instance. So now you can do:
 
 ```php
 <?php
 
-use FuelPHP\Event\Facade\Event;
+use Fuel\Event\Facades\Event;
 
 // Register an event
 Event::on('my_event', function(){}})
@@ -41,7 +41,7 @@ Event::on('my_event', function(){})
 ```php
 <?php
 
-use FuelPHP\Event\Facade\Queue;
+use Fuel\Event\Facades\Queue;
 
 // Add to the queue
 Queue::queue('my_event', $payload);
@@ -70,8 +70,8 @@ Both Queues and Containers have a multiton implementation. This allows you "name
 
 ```php
 
-use FuelPHP\Event\Facade\Event;
-use FuelPHP\Event\Facade\Queue;
+use Fuel\Event\Facades\Event;
+use Fuel\Event\Facades\Queue;
 
 // It works for queues
 Queue::instance('my_name')->on('event', $handler);

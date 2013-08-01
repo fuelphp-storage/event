@@ -20,7 +20,7 @@ Swift and elegant event management in PHP. A simple interface with a lot of powe
 ```php
 <?php
 
-$container = new FuelPHP\Event\Container();
+$container = new Fuel\Event\Container();
 
 $container->on('my_event', function($event){
 	// Act on the event
@@ -89,8 +89,6 @@ $container->on('my_event', function(){
 }, $context, 3);
 ```
 
-__Context binding for Closure handlers is only available in PHP >= 5.4.0__
-
 ## Triggering events
 
 You can trigger an event like so:
@@ -149,7 +147,7 @@ $result = $container->trigger('my_event');
 
 ## Eventable objects
 
-PHP 5.4 gives us `traits`, an awesome way to share functionalities and allow for multiple inheritance. Models can become eventable when they use the `FuelPHP\Event\Eventable` trait. Using it is pretty straight forward.
+PHP 5.4 gives us `traits`, an awesome way to share functionalities and allow for multiple inheritance. Models can become eventable when they use the `Fuel\Event\Eventable` trait. Using it is pretty straight forward.
 
 ### Implementing the trait
 
@@ -157,7 +155,7 @@ PHP 5.4 gives us `traits`, an awesome way to share functionalities and allow for
 class EventableObject
 {
 	// Incluse/use the trait
-	use \FuelPHP\Event\EventTrait;
+	use \Fuel\Event\EventTrait;
 }
 
 // Get a new instance.
@@ -187,7 +185,7 @@ There are 2 configuration options to make it even easier to work with eventable 
 
 class EventableObject
 {
-	use FuelPHP\Event\EventTrait;
+	use Fuel\Event\EventTrait;
 
 	// Set to true to bind itself as the callback context.
 	protected $_eventBindSelf = true;
@@ -217,7 +215,7 @@ Use this when you want to prepend the model to the arguments array.
 
 class EventableObject
 {
-	use FuelPHP\Event\EventTrait;
+	use Fuel\Event\EventTrait;
 
 	// Set to true to prepend itself to the arguments array.
 	protected $_eventPrependSelf = true;

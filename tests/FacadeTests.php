@@ -1,7 +1,7 @@
 <?php
 
-use FuelPHP\Event\Facade\Event;
-use FuelPHP\Event\Facade\Queue;
+use Fuel\Event\Facade\Event;
+use Fuel\Event\Facade\Queue;
 
 class FacadeTests extends PHPUnit_Framework_TestCase
 {
@@ -15,35 +15,35 @@ class FacadeTests extends PHPUnit_Framework_TestCase
 	{
 		$container = Event::forge();
 
-		$this->assertInstanceOf('FuelPHP\\Event\\Container', $container);
+		$this->assertInstanceOf('Fuel\\Event\\Container', $container);
 	}
 
 	public function testForgeQueue()
 	{
 		$container = Queue::forge();
 
-		$this->assertInstanceOf('FuelPHP\\Event\\Queue', $container);
+		$this->assertInstanceOf('Fuel\\Event\\Queue', $container);
 	}
 
 	public function testEventCallForewarding()
 	{
 		$result = Event::on('event', function(){});
 
-		$this->assertInstanceOf('FuelPHP\\Event\\Container', $result);
+		$this->assertInstanceOf('Fuel\\Event\\Container', $result);
 	}
 
 	public function testQueueCallForewarding()
 	{
 		$result = Queue::queue('event');
 
-		$this->assertInstanceOf('FuelPHP\\Event\\Queue', $result);
+		$this->assertInstanceOf('Fuel\\Event\\Queue', $result);
 	}
 
 	public function testEventInstance()
 	{
 		$result = Event::instance('my_instance');
 
-		$this->assertInstanceOf('FuelPHP\\Event\\Container', $result);
+		$this->assertInstanceOf('Fuel\\Event\\Container', $result);
 	}
 
 	public function testDeleteQueueInstance()

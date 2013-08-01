@@ -1,6 +1,6 @@
 <?php
 
-use FuelPHP\Event\Container;
+use Fuel\Event\Container;
 
 class EventTests extends PHPUnit_Framework_TestCase
 {
@@ -8,14 +8,7 @@ class EventTests extends PHPUnit_Framework_TestCase
 
 	public function setUp()
 	{
-		if(version_compare(phpversion(), '5.4.0') >= 0)
-		{
-			include_once __DIR__.'/../dummy/EventableObject.php';
-		}
-		else
-		{
-			include_once __DIR__.'/../dummy/Object.php';
-		}
+		include_once __DIR__.'/../resources/EventableObject.php';
 
 		$this->container = new Container();
 	}
