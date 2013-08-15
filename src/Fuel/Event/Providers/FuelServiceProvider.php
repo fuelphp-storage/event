@@ -8,20 +8,18 @@
  * @link       http://fuelphp.com
  */
 
-namespace Fuel\Event;
+namespace Fuel\Event\Providers;
 
 use Fuel\Dependency\ServiceProvider;
 
 /**
- * ServicesProvider class
- *
- * Defines the services published by this namespace to the DiC
+ * FuelPHP ServiceProvider class for this package
  *
  * @package  Fuel\Display
  *
  * @since  1.0.0
  */
-class ServicesProvider extends ServiceProvider
+class FuelServiceProvider extends ServiceProvider
 {
 	/**
 	 * @var  array  list of service names provided by this provider
@@ -36,13 +34,13 @@ class ServicesProvider extends ServiceProvider
 		// \Fuel\Event\Container
 		$this->register('event', function ($dic)
 		{
-			return new Container();
+			return $dic->resolve('Fuel\Event\Container');
 		});
 
 		// \Fuel\Event\Queue
 		$this->register('queue', function ($dic)
 		{
-			return new Queue();
+			return $dic->resolve('Fuel\Event\Queue');
 		});
 	}
 }
