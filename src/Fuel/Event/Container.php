@@ -109,15 +109,7 @@ class Container
 		array_shift($args);
 
 		// Sort the events.
-		usort($listeners, function($a, $b)
-		{
-			if ($a->priority >= $b->priority)
-			{
-				return 1;
-			}
-
-			return -1;
-		});
+		usort($listeners, [$this, 'listenerSort']);
 
 		foreach ($listeners as $listener)
 		{
@@ -127,12 +119,28 @@ class Container
 			// When the bubbling is prevented.
 			if($listener->propagationStopped())
 			{
-				// Break the event loop.
-				break;
+				return $return;
 			}
 		}
 
 		return $return;
+	}
+
+	/**
+	 * Listener sort function
+	 *
+	 * @param   Listener  $a
+	 * @param   Listener  $b
+	 * @return  int       sort result
+	 */
+	protected function listenerSort(Listener $a, Listener $b)
+	{
+		if ($a->priority >= $b->priority)
+		{
+			return 1;
+		}
+
+		return -1;
 	}
 
 	/**

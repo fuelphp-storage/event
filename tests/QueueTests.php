@@ -82,7 +82,7 @@ class QueueTests extends PHPUnit_Framework_TestCase
 	public function testMultipleFlushersWithgetPayload()
 	{
 		$expected = array(
-			array(1, 2),
+			array(2),
 		);
 
 		$this->queue->queue('event', array(1));

@@ -133,6 +133,11 @@ class Queue
 			$return[] = call_user_func_array(array($this->container, 'trigger'), $payload);
 		}
 
+		if ($flusher)
+		{
+			$this->off($queue, $flusher, $context, $priority);
+		}
+
 		return $return;
 	}
 
