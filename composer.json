@@ -18,7 +18,6 @@
 		"mockery/mockery": "0.7.*"
 	},
 	"autoload": {
-		"psr-0": { "Fuel\\Event": "src/" }
-	},
-	"minimum-stability": "dev"
+		"psr-4": { "Fuel\\Event\\": "src/" }
+	}
 }
