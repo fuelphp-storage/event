@@ -98,7 +98,7 @@ class Listener
 	 */
 	public function name()
 	{
-		return $this->name;
+		return $this->event;
 	}
 
 	/**
