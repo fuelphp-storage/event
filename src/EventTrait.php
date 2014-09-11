@@ -13,7 +13,7 @@ namespace Fuel\Event;
 trait EventTrait
 {
 	/**
-	 * @var  array  $_eventContainer  event container
+	 * @var  Container $_eventContainer  event container
 	 */
 	protected $_eventContainer;
 
