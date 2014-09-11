@@ -40,10 +40,10 @@ class Listener
 	/**
 	 * Constructor
 	 *
-	 * @param  string  $event     event name
-	 * @param  mixed   $handler   handler
-	 * @param  mixed   $context   closure context
-	 * @param  int     $priority  closure context
+	 * @param  string    $event     event name
+	 * @param  callable  $handler   handler
+	 * @param  mixed     $context   closure context
+	 * @param  int       $priority  closure context
 	 */
 	public function __construct($event, $handler, $context = null, $priority = null)
 	{

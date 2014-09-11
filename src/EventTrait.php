@@ -13,7 +13,7 @@ namespace Fuel\Event;
 trait EventTrait
 {
 	/**
-	 * @var  array  $_eventContainer  event container
+	 * @var  Container $_eventContainer  event container
 	 */
 	protected $_eventContainer;
 
@@ -30,10 +30,10 @@ trait EventTrait
 	/**
 	 * Attaches a new event.
 	 *
-	 * @param   string  $event    event name
-	 * @param   mixed   $handler  event handler
-	 * @param   mixed   $context  closure context
-	 * @return  object  $this
+	 * @param   string    $event    event name
+	 * @param   callable  $handler  event handler
+	 * @param   mixed     $context  closure context
+	 * @return  object    $this
 	 */
 	public function on($event, $handler, $context = null, $priority = 0)
 	{

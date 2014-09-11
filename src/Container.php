@@ -21,11 +21,11 @@ class Container
 	/**
 	 * Attaches a new event.
 	 *
-	 * @param   string  $event     event name
-	 * @param   mixed   $handler   event handler
-	 * @param   mixed   $context   closure context
-	 * @param   int     $priority  event priority
-	 * @return  object  $this
+	 * @param   string    $event     event name
+	 * @param   callable  $handler   event handler
+	 * @param   mixed     $context   closure context
+	 * @param   int       $priority  event priority
+	 * @return  object    $this
 	 */
 	public function on($event, $handler, $context = null, $priority = 0)
 	{
