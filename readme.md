@@ -1,6 +1,9 @@
 # FuelPHP Event Package
 
 [![Build Status](https://secure.travis-ci.org/fuelphp/event.png)](http://travis-ci.org/fuelphp/event)
+[![Code Coverage](https://scrutinizer-ci.com/g/fuelphp/event/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/fuelphp/event/?branch=master)
+[![Code Quality](https://scrutinizer-ci.com/g/fuelphp/event/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/fuelphp/event/?branch=master)
+[![HHVM Status](http://hhvm.h4cc.de/badge/fuelphp/event.svg)](http://hhvm.h4cc.de/package/fuelphp/event)
 
 Swift and elegant event management in PHP. A simple interface with a lot of power.
 
