@@ -1,15 +1,15 @@
 <?php
 
-use Fuel\Event\Container;
+namespace Fuel\Event;
 
-class EventTests extends PHPUnit_Framework_TestCase
+use Codeception\TestCase\Test;
+
+class EventTest extends Test
 {
 	protected $container;
 
-	public function setUp()
+	public function _before()
 	{
-		include_once __DIR__.'/../resources/EventableObject.php';
-
 		$this->container = new Container();
 	}
 
@@ -46,7 +46,7 @@ class EventTests extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
 	public function testInvalidHandler()
 	{
@@ -54,7 +54,7 @@ class EventTests extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
 	public function testInvalidContext()
 	{
@@ -142,7 +142,7 @@ class EventTests extends PHPUnit_Framework_TestCase
 
 	public function testArrayCallback()
 	{
-		$obj = new EventableObject();
+		$obj = new \EventableObject();
 
 		$this->container->on('my_event', array($obj, 'increment'));
 		$this->container->trigger('my_event', 2);
@@ -150,13 +150,10 @@ class EventTests extends PHPUnit_Framework_TestCase
 		$this->assertEquals($obj->num, 3);
 	}
 
-	/**
-	 * @requires PHP 5.4
-	 */
 	public function testEventContext()
 	{
 		$something = 1;
-		$context = new stdClass();
+		$context = new \stdClass();
 		$context->val = 1;
 
 		$this->container->on('my_event', function() use(&$something)
@@ -168,12 +165,10 @@ class EventTests extends PHPUnit_Framework_TestCase
 
 		$this->assertEquals($something, 2);
 	}
-	/**
-	 * @requires PHP 5.4
-	 */
+
 	public function testTrait()
 	{
-		$obj = new EventableObject();
+		$obj = new \EventableObject();
 		$something = 1;
 
 		$obj->on('my_event', function() use(&$something){
@@ -185,12 +180,9 @@ class EventTests extends PHPUnit_Framework_TestCase
 		$this->assertEquals($something, 2);
 	}
 
-	/**
-	 * @requires PHP 5.4
-	 */
 	public function testTraitBinding()
 	{
-		$obj = new EventableObject(true);
+		$obj = new \EventableObject(true);
 
 		$obj->on('my_event', function() use(&$something){
 			$this->num++;
@@ -201,13 +193,10 @@ class EventTests extends PHPUnit_Framework_TestCase
 		$this->assertEquals($obj->num, 2);
 	}
 
-	/**
-	 * @requires PHP 5.4
-	 */
 	public function testTraitBindingOverwrite()
 	{
-		$obj = new EventableObject(true);
-		$obj2 = new EventableObject();
+		$obj = new \EventableObject(true);
+		$obj2 = new \EventableObject();
 
 		$obj->on('my_event', function() use(&$something){
 			$this->num++;
@@ -219,12 +208,9 @@ class EventTests extends PHPUnit_Framework_TestCase
 		$this->assertEquals($obj->num, 1);
 	}
 
-	/**
-	 * @requires PHP 5.4
-	 */
 	public function testTraitPrepend()
 	{
-		$obj = new EventableObject(true, true);
+		$obj = new \EventableObject(true, true);
 
 		$obj->on('my_event', function($e, $o) use($obj){
 			$o->increment($e);

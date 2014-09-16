@@ -1,12 +1,18 @@
 <?php
 
-use Fuel\Event\Queue;
+namespace Fuel\Event;
 
-class QueueTests extends PHPUnit_Framework_TestCase
+use Codeception\TestCase\Test;
+
+class QueueTest extends Test
 {
+
+	/**
+	 * @var Queue
+	 */
 	protected $queue;
 
-	public function setUp()
+	public function _before()
 	{
 		$this->queue = new Queue();
 	}
@@ -79,7 +85,7 @@ class QueueTests extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 
-	public function testMultipleFlushersWithgetPayload()
+	public function testMultipleFlushesWithGetPayload()
 	{
 		$expected = array(
 			array(2),
@@ -87,7 +93,7 @@ class QueueTests extends PHPUnit_Framework_TestCase
 
 		$this->queue->queue('event', array(1));
 
-		$result = $this->queue->flush('event', function($event, $number){
+		$this->queue->flush('event', function($event, $number){
 			return $number;
 		});
 
@@ -98,7 +104,7 @@ class QueueTests extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 
-	public function testMultipleFlushersWithMultiplePayloads()
+	public function testMultipleFlushesWithMultiplePayloads()
 	{
 		$expected = array(
 			array(1, 2),
@@ -121,7 +127,7 @@ class QueueTests extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $result);
 	}
 
-	public function textMultipleFlushersWithPropagationStop()
+	public function textMultipleFlushesWithPropagationStop()
 	{
 		$expected = array(
 			array(1),

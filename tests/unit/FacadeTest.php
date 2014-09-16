@@ -1,11 +1,13 @@
 <?php
 
-use Fuel\Event\Facades\Event;
-use Fuel\Event\Facades\Queue;
+namespace Fuel\Event\Facades;
 
-class FacadeTests extends PHPUnit_Framework_TestCase
+use Codeception\TestCase\Test;
+
+class FacadeTest extends Test
 {
-	public function setUp()
+
+	public function _before()
 	{
 		Event::delete(true);
 		Queue::delete(true);
@@ -58,4 +60,5 @@ class FacadeTests extends PHPUnit_Framework_TestCase
 
 		$this->assertEquals($payload, array());
 	}
+
 }
